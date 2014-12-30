@@ -1,7 +1,17 @@
 .mainTile
 {
-width:40%; 
-height:300px; 
+width: 93%; 
+height:295px; 
+margin:4px; 
+border:1px solid black; 
+cursor:pointer;
+border-radius: 5px;
+}
+
+.mapTile
+{
+width:70%; 
+height:600px; 
 margin:4px; 
 border:1px solid black; 
 float: left;
@@ -12,17 +22,27 @@ border-radius: 5px;
 .selector
 {
 width: 15%; 
-height:608px; 
+height:600px; 
 margin:4px; 
 border:1px solid black; 
 float: left;
 border-radius: 5px;
 }
 
+.statsDiv
+{
+width:12%; 
+height:600px; 
+margin:4px; 
+cursor:pointer;
+float: left;
+border-radius: 5px;
+}
+
 #container
 {
-height: 100%;
-width: 100%;
+  width:100%;
+  clear:both; 
 }
 
 .tileDescription
