@@ -64,13 +64,15 @@ function showMap() {
 }
 
 function AddCrimesToMap(coordinates) {
+	console.log(coordinates);
     $.ajax({
-        url: "http://104.40.193.115/WebService/Service1.svc/GetAllCrimesInBoundary",
+        //url: "http://104.40.193.115/WebService/Service1.svc/GetAllCrimesInBoundary",
+		url: "http://104.40.193.115/WebService/Service1.svc/GetAllCrimesInBoundaryByCategory",
         dataType: 'json',
         data: { coordinates: JSON.stringify(coordinates) },
         success: function (response) {
-            for (var i = 0; i < response.GetAllCrimesInBoundaryResult.length; i++) {
-                var crime = response.GetAllCrimesInBoundaryResult[i];
+            for (var i = 0; i < response.GetAllCrimesInBoundaryByCategoryResult.length; i++) {
+                var crime = response.GetAllCrimesInBoundaryByCategoryResult[i];
                 var googleLatAndLong =
                 new google.maps.LatLng(crime.Latitude,
                                        crime.Longitude);
