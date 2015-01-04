@@ -11,6 +11,6 @@ $( document ).ready(function() {
 		window.location.href = '/Website/contacts.html';	
 	});
 	
-	$('#datepicker').datepicker();
+	// $('#datepicker').datepicker();
 	
 });

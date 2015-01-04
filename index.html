@@ -3,15 +3,32 @@
   <head>
       <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 	  <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=drawing"></script>
-      <script src="js/CrimeMap.js"></script>
+    <script src="js/CrimeMap.js"></script>
 	  <script src="js/mainPage.js"></script>
+	  <script src="js/CrimeForm.js"></script>
 	  <link rel="stylesheet" type="text/css" href="css/style.css">
   </head>
   <body>
   <div id="container">
 	  <div id="Selector" class="selector">
-	  <p>From:</p>
-	  <p>To:</p>
+	  	<p>From:</p>
+	  	<p>To:</p>
+	  	<fieldset id="crime-categories">
+	  		<input id="anti-social" name="Anti-social behaviour" value="Anti-social behaviour" type="checkbox"> Anti-social behaviour<br />
+	  		<input id="drugs" name="Drugs" value="Drugs" type="checkbox"> Drugs<br />
+	  		<input id="robbery" name="Robbery" value="Robbery" type="checkbox">  Robbery<br />
+	  		<input id="pow" name="Possession of weapons" value="Possession of weapons" type="checkbox">  Possession of weapons<br />
+	  		<input id="shoplifting" name="Shoplifting" value="Shoplifting" type="checkbox">  Shoplifting<br />
+	  		<input id="burglary" name="Burglary" value="Burglary" type="checkbox">  Burglary<br />
+	  		<input id="bicycle-theft" name="Bicycle theft" value="Bicycle theft" type="checkbox">  Bicycle theft<br />
+	  		<input id="other-theft" name="Other theft" value="Other theft" type="checkbox">  Other theft<br />
+	  		<input id="public-order" name="Public order" value="Public order" type="checkbox">  Public order<br />
+	  		<input id="vehicle-crime" name="Vehicle crime" value="Vehicle crime" type="checkbox">  Vehicle crime<br />
+	  		<input id="cd-and-arson" name="Criminal damage and arson" value="Criminal damage and arson" type="checkbox">  Criminal damage and arson<br />
+	  		<input id="violence-and-so" name="Violence and sexual offence" value="Violence and sexual offence" type="checkbox">  Violence and sexual offence<br />
+	  		<input id="theft-from-person" name="Theft from the person" value="Theft from the person" type="checkbox">  Theft from the person<br />
+	  		<input id="other-crime" name="Other crime" value="Other crime" type="checkbox">  Other crime<br />
+	  	</fieldset>
 	  </div>
       <div id="map" class="mapTile">
 		<p class="tileDescription">Map</p>
