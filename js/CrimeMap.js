@@ -1,4 +1,5 @@
 ﻿var map;
+var g_coordinates;
 
 function showMap() {
     var googleLatAndLong =
@@ -16,10 +17,10 @@ function showMap() {
         var ne = shape.getBounds().getNorthEast();
         var sw = shape.getBounds().getSouthWest();
         var coordinates = [ne, sw];
-
+		g_coordinates = coordinates;
         return coordinates;
     }
-
+	
     var drawingManager = new google.maps.drawing.DrawingManager({
         drawingMode: google.maps.drawing.OverlayType.RECTANGLE,
         drawingControl: true,
@@ -50,26 +51,35 @@ function showMap() {
         console.log(rectangle.constructor.toString());
         console.log(getCoordinates(rectangle));
 
-        var coordinates = getCoordinates(rectangle);
-        AddCrimesToMap(coordinates);
+        getCoordinates(rectangle);
+        AddCrimesToMap();
     });
 
     google.maps.event.addListener(drawingManager, 'circlecomplete', function (circle) {
         console.log(getCoordinates(circle));
 
-        var coordinates = getCoordinates(circle);
-        AddCrimesToMap(coordinates);
+        getCoordinates(circle);
     });
     drawingManager.setMap(map);
 }
 
-function AddCrimesToMap(coordinates) {
-	console.log(coordinates);
+	function getSelected() {
+		var selected = [];
+		$('#crime-categories input:checked').each(function() {
+			selected.push($(this).attr('Value'));
+		});
+		return selected;
+	}
+
+function AddCrimesToMap() {
+	console.log(g_coordinates);
+	
+	var selected = getSelected();
+	console.log(JSON.stringify(selected));
     $.ajax({
-        //url: "http://104.40.193.115/WebService/Service1.svc/GetAllCrimesInBoundary",
-		url: "http://104.40.193.115/WebService/Service1.svc/GetAllCrimesInBoundaryByCategory",
+		url: "http://localhost/CrimeAnalyticsWS/Service1.svc/GetAllCrimesInBoundaryByCategory",
         dataType: 'json',
-        data: { coordinates: JSON.stringify(coordinates) },
+        data: { coordinates: JSON.stringify(g_coordinates), selectedCategories: JSON.stringify(selected)},
         success: function (response) {
             for (var i = 0; i < response.GetAllCrimesInBoundaryByCategoryResult.length; i++) {
                 var crime = response.GetAllCrimesInBoundaryByCategoryResult[i];
