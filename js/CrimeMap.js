@@ -1,5 +1,6 @@
-﻿var map;
+var map;
 var g_coordinates;
+var drawingManager;
 
 function showMap() {
     var googleLatAndLong =
@@ -21,7 +22,7 @@ function showMap() {
         return coordinates;
     }
 	
-    var drawingManager = new google.maps.drawing.DrawingManager({
+    drawingManager = new google.maps.drawing.DrawingManager({
         drawingMode: google.maps.drawing.OverlayType.RECTANGLE,
         drawingControl: true,
         drawingControlOptions: {
@@ -63,39 +64,45 @@ function showMap() {
     drawingManager.setMap(map);
 }
 
-	function getSelected() {
-		var selected = [];
-		$('#crime-categories input:checked').each(function() {
-			selected.push($(this).attr('Value'));
-		});
-		return selected;
-	}
+function getSelected() {
+	var selected = [];
+	$('#crime-categories input:checked').each(function() {
+		selected.push($(this).attr('Value'));
+	});
+
+     return selected;
+
+}
 
 function AddCrimesToMap() {
 	console.log(g_coordinates);
 	
 	var selected = getSelected();
-	console.log(JSON.stringify(selected));
-    $.ajax({
-		url: "http://localhost/CrimeAnalyticsWS/Service1.svc/GetAllCrimesInBoundaryByCategory",
-        dataType: 'json',
-        data: { coordinates: JSON.stringify(g_coordinates), selectedCategories: JSON.stringify(selected)},
-        success: function (response) {
-            for (var i = 0; i < response.GetAllCrimesInBoundaryByCategoryResult.length; i++) {
-                var crime = response.GetAllCrimesInBoundaryByCategoryResult[i];
-                var googleLatAndLong =
-                new google.maps.LatLng(crime.Latitude,
-                                       crime.Longitude);
+    if(selected.length !== 0){
+        $.ajax({
+            url: "http://crimeanalytics.cloudapp.net/WebService/Service1.svc/GetAllCrimesInBoundaryByCategory",
+            dataType: 'json',
+            data: { coordinates: JSON.stringify(g_coordinates), selectedCategories: JSON.stringify(selected)},
+            success: function (response) {
+                for (var i = 0; i < response.GetAllCrimesInBoundaryByCategoryResult.length; i++) {
+                    var crime = response.GetAllCrimesInBoundaryByCategoryResult[i];
+                    var googleLatAndLong =
+                    new google.maps.LatLng(crime.Latitude,
+                                           crime.Longitude);
 
-                var title = crime.Location + ' ' + crime.Context + ' ' + crime.CategoryName; 
+                    var title = crime.Location + ' ' + crime.Context + ' ' + crime.CategoryName; 
 
-                addMarker(map, googleLatAndLong, title, title, crime); 
+                    addMarker(map, googleLatAndLong, title, title, crime); 
+                }
+            },
+            error: function (xhr, status, error) {
+                $("#error").removeClass("hidden");
             }
-        },
-        error: function (xhr, status, error) {
-            alert(status + '; ' + error);
-        }
-    }); 
+        }); 
+    }else{
+         $('#warning').removeClass("hidden");
+    }
+   
 }
 
 function addMarker(map, latlong, title, content, crime) {

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+ 	<head>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+	  <link href="css/bootstrap.css" rel="stylesheet">
+	  <link href="css/style.css" rel="stylesheet">
+	</head>
+  <body>
+ 		<div class="navbar navbar-inverse">
+		  <div class="navbar-header">
+		    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-inverse-collapse">
+		      <span class="icon-bar"></span>
+		      <span class="icon-bar"></span>
+		      <span class="icon-bar"></span>
+		    </button>
+		    <a class="navbar-brand" href="#">Crime Analytics</a>
+		  </div>
+		  <div class="navbar-collapse collapse navbar-inverse-collapse">
+		    <ul class="nav navbar-nav">
+		      <li><a href="/index.html">Home</a></li>
+		      <li class="active"><a href="#">About</a></li>
+		      <li><a href="/contact.html">Contact</a></li>
+		    </ul>
+		  </div>
+		</div>
+
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12">
+          <h1 class="page-header">About
+            <small>Crime Analytics</small>
+          </h1>
+        </div>
+    	</div>
+
+    	<div class="jumbotron">
+			  <p>We aim to provide you with accurate infromation about crimes in you area or for any area that you are intrersted in. We will also be brining new features. All crime data is from the police.</p>
+			  <p><a id="learn-more" class="btn btn-primary btn-lg">Learn more</a>  <a class="btn btn-primary btn-lg" href="/contact.html">Contact Us</a></p>
+			</div>
+
+			<div id="more-info" class="well well-lg" style="display: none">
+				A bit more about us.
+			</div>
+    </div>
+    
+     <script>
+    	$( "#learn-more" ).click(function() {
+			  $( "#more-info" ).toggle( "slow" );
+			});
+    </script>
+
+    <script src="js/bootstrap.min.js"></script>
+  </body>
+</html>
