@@ -53,8 +53,13 @@
 					  <strong>ERROR:</strong> <a href="#" class="alert-link">There was an issue with your request.
 					</div>
             <div class="col-lg-3">
-             	<p>From:</p>
-					  	<p>To:</p>
+            	<fieldset id="date-range">
+            		<p>From:</p>
+            		<input id="from-date" type="date">
+								<p>To:</p>
+								<input id="to-date" type="date">
+            	</fieldset>
+					  	
 					  	<fieldset id="crime-categories">
 					  		<input id="anti-social" name="Anti-social behaviour" value="1" type="checkbox" checked> Anti-social behaviour<br />
 					  		<input id="drugs" name="Drugs" value="2" type="checkbox" checked>Drugs<br />
@@ -108,6 +113,11 @@
 
     </div>
     <!-- /.container -->
- 	<script src="js/bootstrap.min.js"></script>
-  </body>
+	 	<script src="js/bootstrap.min.js"></script>
+	 	<script>
+		 	var todayDate = new Date().toISOString().split('T')[0];
+		 	$("#to-date").attr("max", todayDate);
+		 	$("#from-date").attr("max", todayDate);
+	 	</script>
+	</body>
 </html>
