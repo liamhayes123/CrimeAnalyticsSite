@@ -1,6 +1,7 @@
 var map;
 var g_coordinates;
 var drawingManager;
+var gmarkers = [];
 
 function showMap() {
     var googleLatAndLong =
@@ -74,6 +75,12 @@ function getSelected() {
 
 }
 
+function removeMarkers(){
+    for(i=0; i<gmarkers.length; i++){
+        gmarkers[i].setMap(null);
+    }
+}
+
 function AddCrimesToMap() {
 	console.log(g_coordinates);
 	
@@ -84,6 +91,7 @@ function AddCrimesToMap() {
             dataType: 'json',
             data: { coordinates: JSON.stringify(g_coordinates), selectedCategories: JSON.stringify(selected)},
             success: function (response) {
+				removeMarkers();
                 for (var i = 0; i < response.GetAllCrimesInBoundaryByCategoryResult.length; i++) {
                     var crime = response.GetAllCrimesInBoundaryByCategoryResult[i];
                     var googleLatAndLong =
@@ -100,6 +108,7 @@ function AddCrimesToMap() {
             }
         }); 
     }else{
+		 removeMarkers();
          $('#warning').removeClass("hidden");
     }
    
@@ -119,7 +128,7 @@ function addMarker(map, latlong, title, content, crime) {
     google.maps.event.addListener(marker, 'click', function () {
         infowindow.open(map, marker);
     });
-
+	gmarkers.push(marker);
     marker.setMap(map);
 }
 
