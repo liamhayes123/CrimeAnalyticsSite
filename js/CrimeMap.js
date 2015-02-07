@@ -87,8 +87,8 @@ function AddCrimesToMap() {
 	var selected = getSelected();
     if(selected.length !== 0){
         $.ajax({
-            //url: "http://crimeanalytics.cloudapp.net/WebService/Service1.svc/GetAllCrimesInBoundaryByCategory",
-            url: "http://localhost/CrimeAnalyticsWS/Service1.svc/GetAllCrimesInBoundaryByCategory",
+            url: "http://crimeanalytics.cloudapp.net/WebService/Service1.svc/GetAllCrimesInBoundaryByCategory",
+            //url: "http://localhost/CrimeAnalyticsWS/Service1.svc/GetAllCrimesInBoundaryByCategory",
 			dataType: 'json',
             data: { coordinates: JSON.stringify(g_coordinates), 
 					selectedCategories: JSON.stringify(selected), 
