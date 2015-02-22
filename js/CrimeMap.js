@@ -83,12 +83,12 @@ function removeMarkers(){
 
 function AddCrimesToMap() {
 	console.log(g_coordinates);
-	
 	var selected = getSelected();
+	
     if(selected.length !== 0){
         $.ajax({
-            url: "http://crimeanalytics.cloudapp.net/WebService/Service1.svc/GetAllCrimesInBoundaryByCategory",
-            //url: "http://localhost/CrimeAnalyticsWS/Service1.svc/GetAllCrimesInBoundaryByCategory",
+            url: "http://crimeanalytics.cloudapp.net/WebService/CrimeAnalyticsService.svc/GetAllCrimes",
+            //url: "http://192.168.1.236/CrimeAnalyticsWS/CrimeAnalyticsService.svc/GetAllCrimes",
 			dataType: 'json',
             data: { coordinates: JSON.stringify(g_coordinates), 
 					selectedCategories: JSON.stringify(selected), 
@@ -97,8 +97,8 @@ function AddCrimesToMap() {
 			},
             success: function (response) {
 				removeMarkers();
-                for (var i = 0; i < response.GetAllCrimesInBoundaryByCategoryResult.length; i++) {
-                    var crime = response.GetAllCrimesInBoundaryByCategoryResult[i];
+                for (var i = 0; i < response.GetAllCrimesResult.length; i++) {
+                    var crime = response.GetAllCrimesResult[i];
                     var googleLatAndLong =
                     new google.maps.LatLng(crime.Latitude,
                                            crime.Longitude);
