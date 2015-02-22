@@ -87,8 +87,8 @@ function AddCrimesToMap() {
 	
     if(selected.length !== 0){
         $.ajax({
-            url: "http://crimeanalytics.cloudapp.net/WebService/CrimeAnalyticsService.svc/GetAllCrimes",
-            //url: "http://192.168.1.236/CrimeAnalyticsWS/CrimeAnalyticsService.svc/GetAllCrimes",
+            //url: "http://crimeanalytics.cloudapp.net/WebService/CrimeAnalyticsService.svc/GetAllCrimes",
+            url: "http://192.168.1.236/CrimeAnalyticsWS/CrimeAnalyticsService.svc/GetAllCrimes",
 			dataType: 'json',
             data: { coordinates: JSON.stringify(g_coordinates), 
 					selectedCategories: JSON.stringify(selected), 
@@ -116,7 +116,6 @@ function AddCrimesToMap() {
 		 removeMarkers();
          $('#warning').removeClass("hidden");
     }
-   
 }
 
 function addMarker(map, latlong, title, content, crime) {
