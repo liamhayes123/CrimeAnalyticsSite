@@ -11,6 +11,6 @@ $( document ).ready(function() {
 		window.location.href = '/Website/contacts.html';	
 	});
 	
-	$( "#to-date" ).datepicker();
-	$( "#from-date" ).datepicker();
+	$( "#to-date" ).datepicker().datepicker("setDate", new Date());
+	$( "#from-date" ).datepicker().datepicker("setDate", new Date());
 });
