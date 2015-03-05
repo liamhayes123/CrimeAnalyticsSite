@@ -2,6 +2,7 @@ var map;
 var g_coordinates;
 var drawingManager;
 var gmarkers = [];
+var drawnShapes = [];
 
 function showMap() {
     var googleLatAndLong =
@@ -50,12 +51,16 @@ function showMap() {
     });
 
     google.maps.event.addListener(drawingManager, 'rectanglecomplete', function (rectangle) {
-        console.log(rectangle.constructor.toString());
-        console.log(getCoordinates(rectangle));
-
+        //console.log(rectangle.constructor.toString());
+        //console.log(getCoordinates(rectangle));
+		deleteAllShape();
         getCoordinates(rectangle);
         AddCrimesToMap();
+		drawingManager.setDrawingMode(null);
+		drawnShapes.push(rectangle);
     });
+	
+	
 
     google.maps.event.addListener(drawingManager, 'circlecomplete', function (circle) {
         console.log(getCoordinates(circle));
@@ -81,14 +86,22 @@ function removeMarkers(){
     }
 }
 
+function deleteAllShape() {
+  for (var i=0; i < drawnShapes.length; i++)
+  {
+    drawnShapes[i].setMap(null);
+  }
+  drawnShapes = [];
+}
+
 function AddCrimesToMap() {
 	console.log(g_coordinates);
 	var selected = getSelected();
 	
     if(selected.length !== 0){
         $.ajax({
-            //url: "http://crimeanalytics.cloudapp.net/WebService/CrimeAnalyticsService.svc/GetAllCrimes",
-            url: "http://192.168.1.236/CrimeAnalyticsWS/CrimeAnalyticsService.svc/GetAllCrimes",
+            url: "http://crimeanalytics.cloudapp.net/WebService/CrimeAnalyticsService.svc/GetAllCrimes",
+            //url: "http://192.168.1.236/CrimeAnalyticsWS/CrimeAnalyticsService.svc/GetAllCrimes",
 			dataType: 'json',
             data: { coordinates: JSON.stringify(g_coordinates), 
 					selectedCategories: JSON.stringify(selected), 
